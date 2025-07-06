@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   nginx:
     image: nginx:1.26-alpine
@@ -22,15 +20,15 @@ services:
 
   certbot:
     image: certbot/certbot:v2.11.0
+    user: "${UID}:${GID}"
     container_name: certbot
     restart: unless-stopped
     volumes:
       - ./certbot/www:/var/www/certbot
       - ./certs:/etc/letsencrypt
       - ./certs-data:/var/lib/letsencrypt
-    command: certonly --webroot --webroot-path=/var/www/certbot \
-      --email apptronium@gmail.com --agree-tos --no-eff-email \
-      -d apptronium.com -d www.apptronium.com
+      - ./certbot/logs:/var/log/letsencrypt
+    command: certonly --webroot --webroot-path=/var/www/certbot --email apptronium@gmail.com --agree-tos --no-eff-email -d apptronium.com --staging --logs-dir /var/log/letsencrypt
 
 networks:
   apptronium:
