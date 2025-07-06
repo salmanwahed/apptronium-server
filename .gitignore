@@ -1,0 +1,5 @@
+# Ignore a specific directory
+nginx/logs/
+
+# Ignore all .log files
+*.log
