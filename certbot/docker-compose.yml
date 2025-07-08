@@ -1,0 +1,15 @@
+services:
+    certbot:
+        build: .
+        container_name: certbot_cron
+        restart: unless-stopped
+        volumes:
+            - ../shared/www:/var/www/certbot
+            - ../shared/certs:/etc/letsencrypt
+            - /var/run/docker.sock:/var/run/docker.sock
+        networks:
+            - apptronium_net
+
+networks:
+    apptronium_net:
+        external: true
