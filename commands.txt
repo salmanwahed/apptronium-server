@@ -1,0 +1,21 @@
+# create docker network
+docker network create apptronium_net
+
+# install certbot
+sudo apt update && sudo apt install certbot -y
+
+
+# create challange directory
+sudo mkdir -p /var/www/certbot
+sudo chown $USER:$USER /var/www/certbot
+
+# start nginx container
+docker compose up
+
+
+# obtain ssl certificate
+sudo certbot certonly --webroot -w /var/www/certbot -d apptronium.com --agree-tos
+
+
+# after updating the nginx conf reload it
+docker compose up -d
