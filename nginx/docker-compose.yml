@@ -9,8 +9,8 @@ services:
         volumes:
             - ../html:/usr/share/nginx/html:ro
             - ./conf.d:/etc/nginx/conf.d:ro
-            - ../shared/www:/var/www/certbot:ro
-            - ../shared/certs:/etc/letsencrypt:ro
+            - /var/www/certbot:/var/www/certbot:ro
+            - /etc/letsencrypt:/etc/letsencrypt:ro
         networks:
             - apptronium_net
 
