@@ -1,0 +1,48 @@
+services:
+  etcd:
+    image: bitnami/etcd:3.5.14
+    container_name: apisix_etcd
+    restart: unless-stopped
+    volumes:
+      - ./etcd-data:/bitnami/etcd
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    networks:
+      - apptronium_net
+
+  apisix:
+    image: apache/apisix:3.11.0-debian
+    container_name: apisix_gateway
+    restart: unless-stopped
+    volumes:
+      # Mount the gateway configuration file
+      - ./conf/apisix.yaml:/usr/local/apisix/conf/config.yaml:ro
+    depends_on:
+      - etcd
+    ports:
+      # Expose the admin port for direct access or troubleshooting
+      - "9180:9180"
+    networks:
+      - apptronium_net
+
+  apisix-dashboard:
+    image: apache/apisix-dashboard:3.0.1-alpine
+    container_name: apisix_dashboard
+    restart: unless-stopped
+    volumes:
+      # Mount the dashboard configuration file
+      - ./conf/dashboard.yaml:/usr/local/apisix-dashboard/conf/conf.yaml:ro
+    ports:
+      # The internal port Nginx will proxy to
+      - "9000:9000"
+    networks:
+      - apptronium_net
+
+networks:
+  apptronium_net:
+    external: true
+
+volumes:
+  etcd_data:
+    driver: local

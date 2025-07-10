@@ -1,0 +1,39 @@
+apisix:
+  node_listen: 9080
+  enable_ipv6: false
+
+deployment:
+  admin:
+    # WARNING: This is insecure for production. Restrict to trusted IPs.
+    allow_admin:
+      - 0.0.0.0/0
+    
+    admin_key:
+      - name: "admin"
+        key: ebd2791b451a4344b4b02f6af000545a
+        role: admin
+
+  etcd:
+    host:
+      - "http://etcd:2379"
+    prefix: "/apisix"
+
+# Enables the necessary plugins for your gateway
+plugins:
+  # --- Authentication ---
+  - key-auth          # Primary method for API keys
+  - jwt-auth          # For advanced token needs
+  - basic-auth        # As requested, but use with caution
+
+  # --- Rate Limiting & Monetization ---
+  - limit-count       # Core of your pricing tiers
+  - limit-conn        # Prevents service overload
+
+  # --- Logging & Monitoring ---
+  - http-logger       # For detailed request logs
+  - prometheus        # For metrics and dashboards
+
+  # --- Essential Security & Utility ---
+  - cors              # To allow browser access
+  - ip-restriction    # To block malicious traffic
+  - proxy-rewrite     # For request manipulation

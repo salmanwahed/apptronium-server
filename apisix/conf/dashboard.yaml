@@ -1,0 +1,16 @@
+listen:
+  port: 9000    # The internal port the dashboard will listen on.
+
+apisix:
+  - name: "APISIX Gateway"
+    # CORRECTED: Use the service name 'apisix' for Docker's internal DNS.
+    endpoint: "http://apisix:9180"
+    
+    # The admin key MUST match the one in apisix.yaml
+    secret: "ebd2791b451a4344b4b02f6af000545a" 
+
+user:
+  # The username and password you will use to log into the dashboard UI
+  login:
+    username: admin
+    password: admin
