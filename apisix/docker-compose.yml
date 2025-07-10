@@ -1,6 +1,6 @@
 services:
   etcd:
-    image: bitnami/etcd:3.5.14
+    image: bitnami/etcd:3.4.15
     container_name: apisix_etcd
     restart: unless-stopped
     volumes:
