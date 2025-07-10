@@ -8,6 +8,11 @@ services:
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
       - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    healthcheck:
+      test: ["CMD", "etcdctl", "endpoint", "health"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
     networks:
       - apptronium_net
 
@@ -19,7 +24,8 @@ services:
       # Mount the gateway configuration file
       - ./conf/apisix.yaml:/usr/local/apisix/conf/config.yaml:ro
     depends_on:
-      - etcd
+      etcd:
+        condition: service_healthy
     ports:
       # Expose the admin port for direct access or troubleshooting
       - "9180:9180"
