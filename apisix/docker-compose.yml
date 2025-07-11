@@ -4,7 +4,7 @@ services:
     container_name: apisix_etcd
     restart: unless-stopped
     volumes:
-      - ./etcd-data:/bitnami/etcd
+      - etcd_data:/bitnami/etcd
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
       - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
