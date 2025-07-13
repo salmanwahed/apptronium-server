@@ -1,12 +1,15 @@
 listen:
+  host: 0.0.0.0
   port: 9000
 
-apisix:
-  - name: "APISIX Gateway"
-    endpoint: "http://apisix:9180" 
-    secret: "ebd2791b451a4344b4b02f6af000545a" 
+etcd:
+  endpoints:
+    - "etcd:2379"
 
-user:
-  login:
-    username: admin
-    password: admin
+apisix:
+  endpoint_addr: "http://apisix:9180"
+  admin_key: "ebd2791b451a4344b4b02f6af000545a"
+
+authentication:
+  secret: "x7k9m2p8q5w3z6t4r1y0n5j8h2f6v4b"
+  expire_time: 3600
