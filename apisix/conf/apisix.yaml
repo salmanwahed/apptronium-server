@@ -5,10 +5,10 @@ apisix:
 deployment:
   admin:
     allow_admin:
-      - 127.0.0.1/32  # Restrict to localhost; adjust as needed
+      - 0.0.0.0/0
     admin_key:
       - name: "admin"
-        key: "ebd2791b451a4344b4b02f6af000545a"  # Match dashboard.yaml
+        key: "ebd2791b451a4344b4b02f6af000545a"
         role: admin
 
   etcd:
