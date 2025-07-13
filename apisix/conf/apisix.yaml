@@ -2,14 +2,22 @@ apisix:
   node_listen: 9080
   enable_ipv6: false
 
+  enable_control: true
+  control:
+    ip: "0.0.0.0"
+    port: 9092
+
+
 deployment:
   admin:
     allow_admin:
       - 0.0.0.0/0
+
     admin_key:
       - name: "admin"
-        key: "ebd2791b451a4344b4b02f6af000545a"
+        key: ebd2791b451a4344b4b02f6af000545a
         role: admin
+
 
   etcd:
     host:
