@@ -12,6 +12,11 @@ conf:
   #   cert: "/tmp/cert/example.crt" # Path of your SSL cert.
   #   key:  "/tmp/cert/example.key"  # Path of your SSL key.
 
+  apisix:
+  - name: "APISIX Gateway"
+    endpoint: "http://apisix:9180" 
+    secret: "ebd2791b451a4344b4b02f6af000545a" 
+
   allow_list:             # If we don't set any IP list, then any IP access is allowed by default.
     - 127.0.0.1           # The rules are checked in sequence until the first match is found.
     - ::1
