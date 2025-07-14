@@ -14,7 +14,13 @@ docker compose up
 
 
 # obtain ssl certificate
-sudo certbot certonly --webroot -w /var/www/certbot -d apptronium.com --agree-tos
+sudo certbot certonly --webroot -w /var/www/certbot \
+  -d apptronium.com \
+  -d www.apptronium.com \
+  -d apigw.apptronium.com \
+  -d apisix.apptronium.com \
+  -d jenkins.apptronium.com \
+  --agree-tos
 
 
 # after updating the nginx conf reload it
