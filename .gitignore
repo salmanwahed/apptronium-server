@@ -4,3 +4,4 @@ logs/
 
 # Ignore all .log files
 *.log
+*.env
