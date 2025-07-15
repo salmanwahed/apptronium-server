@@ -28,6 +28,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./conf/apisix.yaml:/usr/local/apisix/conf/config.yaml:ro
+      - ./scripts/apisix-entrypoint.sh:/usr/local/bin/apisix-entrypoint.sh:ro
     depends_on:
       etcd:
         condition: service_healthy
@@ -44,6 +45,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./conf/dashboard.yaml:/usr/local/apisix-dashboard/conf/conf.yaml:ro
+      - ./scripts/dashboard-entrypoint.sh:/usr/local/bin/dashboard-entrypoint.sh:ro
     depends_on:
       - etcd
     ports:
