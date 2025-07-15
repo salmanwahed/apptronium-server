@@ -15,7 +15,7 @@ deployment:
 
     admin_key:
       - name: "admin"
-        key: ebd2791b451a4344b4b02f6af000545a
+        key: <ADMIN_API_KEY>
         role: admin
 
 
