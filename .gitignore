@@ -2,6 +2,10 @@
 logs/
 **/logs/
 
+<<<<<<< HEAD
 # Ignore all .log files
+=======
+# Ignore all .log and .env files
+>>>>>>> df350f0380d4e0ca716bad360b2a965fc78bd9f9
 *.log
 *.env
