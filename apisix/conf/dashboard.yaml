@@ -15,7 +15,7 @@ conf:
   apisix:
   - name: "APISIX Gateway"
     endpoint: "http://apisix:9180" 
-    secret: "ebd2791b451a4344b4b02f6af000545a" 
+    secret: ${ADMIN_API_KEY} 
 
   allow_list:             # If we don't set any IP list, then any IP access is allowed by default.
     - 127.0.0.1           # The rules are checked in sequence until the first match is found.
@@ -57,14 +57,13 @@ conf:
     content_security_policy: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src xx.xx.xx.xx:3000"  # You can set frame-src to provide content for your grafana panel.
 
 authentication:
-  secret:
-    x7k9m2p8q5w3z6t4r1y0n5j8h2f6v4b               # secret for jwt token generation.
+  secret: ${DASHBOARD_SECRET}                     # secret for jwt token generation.
                                                   # NOTE: Highly recommended to modify this value to protect `manager api`.
                                                   # if it's default value, when `manager api` start, it will generate a random string to replace it.
   expire_time: 3600                               # jwt token expire time, in second
   users:                                          # yamllint enable rule:comments-indentation
     - username: admin                             # username and password for login `manager api`
-      password: admin
+      password: ${ADMIN_PASSWORD}
 
 plugins:
   - api-breaker

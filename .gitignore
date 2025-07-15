@@ -2,5 +2,6 @@
 logs/
 **/logs/
 
-# Ignore all .log files
+# Ignore all .log and .env files
 *.log
+*.env
