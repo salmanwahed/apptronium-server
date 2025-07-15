@@ -27,7 +27,7 @@ services:
     container_name: apisix_gateway
     restart: unless-stopped
     volumes:
-      - ./conf/apisix.yaml:/usr/local/apisix/conf/config.yaml:ro
+      - ./conf/apisix.template.yaml:/usr/local/apisix/conf/config.template.yaml:ro
       - ./scripts/apisix-entrypoint.sh:/usr/local/bin/apisix-entrypoint.sh:ro
     depends_on:
       etcd:
@@ -38,13 +38,14 @@ services:
       - apptronium_net
     env_file:
       - apisix.env
+    entrypoint: ["/bin/sh", "/usr/local/bin/apisix-entrypoint.sh"]
 
   apisix-dashboard:
     image: apache/apisix-dashboard:3.0.1-alpine
     container_name: apisix_dashboard
     restart: unless-stopped
     volumes:
-      - ./conf/dashboard.yaml:/usr/local/apisix-dashboard/conf/conf.yaml:ro
+      - ./conf/dashboard.template.yaml:/usr/local/apisix-dashboard/conf/conf.template.yaml:ro
       - ./scripts/dashboard-entrypoint.sh:/usr/local/bin/dashboard-entrypoint.sh:ro
     depends_on:
       - etcd
@@ -54,6 +55,7 @@ services:
       - apptronium_net
     env_file:
       - apisix.env
+    entrypoint: ["/bin/sh", "/usr/local/bin/dashboard-entrypoint.sh"]
 
 volumes:
   etcd_data:
